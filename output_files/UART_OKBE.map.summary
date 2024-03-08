@@ -1,13 +1,13 @@
-Analysis & Synthesis Status : Successful - Fri Jan 19 23:14:55 2024
+Analysis & Synthesis Status : Successful - Fri Mar  8 22:49:42 2024
 Quartus Prime Version : 22.1std.1 Build 917 02/14/2023 SC Lite Edition
 Revision Name : UART_OKBE
 Top-level Entity Name : UART_OKBE
 Family : Cyclone IV E
-Total logic elements : 40
-    Total combinational functions : 40
-    Dedicated logic registers : 24
-Total registers : 24
-Total pins : 5
+Total logic elements : 195
+    Total combinational functions : 181
+    Dedicated logic registers : 106
+Total registers : 106
+Total pins : 6
 Total virtual pins : 0
 Total memory bits : 0
 Embedded Multiplier 9-bit elements : 0

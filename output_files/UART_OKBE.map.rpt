@@ -1,5 +1,5 @@
 Analysis & Synthesis report for UART_OKBE
-Fri Jan 19 23:14:55 2024
+Fri Mar  8 22:49:42 2024
 Quartus Prime Version 22.1std.1 Build 917 02/14/2023 SC Lite Edition
 
 
@@ -13,20 +13,17 @@ Quartus Prime Version 22.1std.1 Build 917 02/14/2023 SC Lite Edition
   5. Analysis & Synthesis Source Files Read
   6. Analysis & Synthesis Resource Usage Summary
   7. Analysis & Synthesis Resource Utilization by Entity
-  8. State Machine - |UART_OKBE|uart_tx:i_uart_tx|fsm_state
-  9. State Machine - |UART_OKBE|uart_rx:i_uart_rx|fsm_state
+  8. State Machine - |UART_OKBE|RX:rx_inst|state
+  9. State Machine - |UART_OKBE|TX:TX_inst|state
  10. Registers Removed During Synthesis
- 11. Removed Registers Triggering Further Register Optimizations
- 12. General Register Statistics
+ 11. General Register Statistics
+ 12. Inverted Register Statistics
  13. Multiplexer Restructuring Statistics (Restructuring Performed)
- 14. Parameter Settings for User Entity Instance: Top-level Entity: |UART_OKBE
- 15. Parameter Settings for User Entity Instance: uart_rx:i_uart_rx
- 16. Parameter Settings for User Entity Instance: uart_tx:i_uart_tx
- 17. Port Connectivity Checks: "uart_tx:i_uart_tx"
- 18. Port Connectivity Checks: "uart_rx:i_uart_rx"
- 19. Post-Synthesis Netlist Statistics for Top Partition
- 20. Elapsed Time Per Partition
- 21. Analysis & Synthesis Messages
+ 14. Parameter Settings for User Entity Instance: TX:TX_inst
+ 15. Parameter Settings for User Entity Instance: RX:rx_inst
+ 16. Post-Synthesis Netlist Statistics for Top Partition
+ 17. Elapsed Time Per Partition
+ 18. Analysis & Synthesis Messages
 
 
 
@@ -53,16 +50,16 @@ https://fpgasoftware.intel.com/eula.
 +-------------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                        ;
 +------------------------------------+------------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Fri Jan 19 23:14:55 2024          ;
+; Analysis & Synthesis Status        ; Successful - Fri Mar  8 22:49:42 2024          ;
 ; Quartus Prime Version              ; 22.1std.1 Build 917 02/14/2023 SC Lite Edition ;
 ; Revision Name                      ; UART_OKBE                                      ;
 ; Top-level Entity Name              ; UART_OKBE                                      ;
 ; Family                             ; Cyclone IV E                                   ;
-; Total logic elements               ; 40                                             ;
-;     Total combinational functions  ; 40                                             ;
-;     Dedicated logic registers      ; 24                                             ;
-; Total registers                    ; 24                                             ;
-; Total pins                         ; 5                                              ;
+; Total logic elements               ; 195                                            ;
+;     Total combinational functions  ; 181                                            ;
+;     Dedicated logic registers      ; 106                                            ;
+; Total registers                    ; 106                                            ;
+; Total pins                         ; 6                                              ;
 ; Total virtual pins                 ; 0                                              ;
 ; Total memory bits                  ; 0                                              ;
 ; Embedded Multiplier 9-bit elements ; 0                                              ;
@@ -174,15 +171,15 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------+-------------+
 
 
-+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                                                          ;
-+----------------------------------+-----------------+------------------------------+-------------------------------------------------------------------+---------+
-; File Name with User-Entered Path ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                      ; Library ;
-+----------------------------------+-----------------+------------------------------+-------------------------------------------------------------------+---------+
-; uart.sv                          ; yes             ; User SystemVerilog HDL File  ; C:/Users/sobak/Desktop/FASM_Simply_Packet_T1/UART_OKBE/uart.sv    ;         ;
-; uart_tx.sv                       ; yes             ; User SystemVerilog HDL File  ; C:/Users/sobak/Desktop/FASM_Simply_Packet_T1/UART_OKBE/uart_tx.sv ;         ;
-; uart_rx.sv                       ; yes             ; User SystemVerilog HDL File  ; C:/Users/sobak/Desktop/FASM_Simply_Packet_T1/UART_OKBE/uart_rx.sv ;         ;
-+----------------------------------+-----------------+------------------------------+-------------------------------------------------------------------+---------+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                            ;
++----------------------------------+-----------------+------------------------------+---------------------------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                        ; Library ;
++----------------------------------+-----------------+------------------------------+---------------------------------------------------------------------+---------+
+; UART_OKBE.sv                     ; yes             ; User SystemVerilog HDL File  ; C:/Users/sobak/Desktop/FASM_Simply_Packet_T1/UART_OKBE/UART_OKBE.sv ;         ;
+; tx.sv                            ; yes             ; User SystemVerilog HDL File  ; C:/Users/sobak/Desktop/FASM_Simply_Packet_T1/UART_OKBE/tx.sv        ;         ;
+; rx.sv                            ; yes             ; User SystemVerilog HDL File  ; C:/Users/sobak/Desktop/FASM_Simply_Packet_T1/UART_OKBE/rx.sv        ;         ;
++----------------------------------+-----------------+------------------------------+---------------------------------------------------------------------+---------+
 
 
 +---------------------------------------------------------+
@@ -190,108 +187,78 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------------+-----------+
 ; Resource                                    ; Usage     ;
 +---------------------------------------------+-----------+
-; Estimated Total logic elements              ; 40        ;
+; Estimated Total logic elements              ; 195       ;
 ;                                             ;           ;
-; Total combinational functions               ; 40        ;
+; Total combinational functions               ; 181       ;
 ; Logic element usage by number of LUT inputs ;           ;
-;     -- 4 input functions                    ; 15        ;
-;     -- 3 input functions                    ; 8         ;
-;     -- <=2 input functions                  ; 17        ;
+;     -- 4 input functions                    ; 77        ;
+;     -- 3 input functions                    ; 15        ;
+;     -- <=2 input functions                  ; 89        ;
 ;                                             ;           ;
 ; Logic elements by mode                      ;           ;
-;     -- normal mode                          ; 27        ;
-;     -- arithmetic mode                      ; 13        ;
+;     -- normal mode                          ; 115       ;
+;     -- arithmetic mode                      ; 66        ;
 ;                                             ;           ;
-; Total registers                             ; 24        ;
-;     -- Dedicated logic registers            ; 24        ;
+; Total registers                             ; 106       ;
+;     -- Dedicated logic registers            ; 106       ;
 ;     -- I/O registers                        ; 0         ;
 ;                                             ;           ;
-; I/O pins                                    ; 5         ;
+; I/O pins                                    ; 6         ;
 ;                                             ;           ;
 ; Embedded Multiplier 9-bit elements          ; 0         ;
 ;                                             ;           ;
 ; Maximum fan-out node                        ; clk~input ;
-; Maximum fan-out                             ; 24        ;
-; Total fan-out                               ; 217       ;
-; Average fan-out                             ; 2.93      ;
+; Maximum fan-out                             ; 106       ;
+; Total fan-out                               ; 807       ;
+; Average fan-out                             ; 2.70      ;
 +---------------------------------------------+-----------+
 
 
-+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                               ;
-+----------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+------------------------------+-------------+--------------+
-; Compilation Hierarchy Node ; Combinational ALUTs ; Dedicated Logic Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name          ; Entity Name ; Library Name ;
-+----------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+------------------------------+-------------+--------------+
-; |UART_OKBE                 ; 40 (1)              ; 24 (0)                    ; 0           ; 0            ; 0       ; 0         ; 5    ; 0            ; |UART_OKBE                   ; UART_OKBE   ; work         ;
-;    |uart_rx:i_uart_rx|     ; 39 (39)             ; 24 (24)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |UART_OKBE|uart_rx:i_uart_rx ; uart_rx     ; work         ;
-+----------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+------------------------------+-------------+--------------+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                        ;
++----------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+-----------------------+-------------+--------------+
+; Compilation Hierarchy Node ; Combinational ALUTs ; Dedicated Logic Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name   ; Entity Name ; Library Name ;
++----------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+-----------------------+-------------+--------------+
+; |UART_OKBE                 ; 181 (12)            ; 106 (10)                  ; 0           ; 0            ; 0       ; 0         ; 6    ; 0            ; |UART_OKBE            ; UART_OKBE   ; work         ;
+;    |RX:rx_inst|            ; 102 (102)           ; 50 (50)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |UART_OKBE|RX:rx_inst ; RX          ; work         ;
+;    |TX:TX_inst|            ; 67 (67)             ; 46 (46)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |UART_OKBE|TX:TX_inst ; TX          ; work         ;
++----------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+-----------------------+-------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
 
 Encoding Type:  One-Hot
-+----------------------------------------------------------------------------------------------------------+
-; State Machine - |UART_OKBE|uart_tx:i_uart_tx|fsm_state                                                   ;
-+---------------------+--------------------+--------------------+---------------------+--------------------+
-; Name                ; fsm_state.FSM_STOP ; fsm_state.FSM_SEND ; fsm_state.FSM_START ; fsm_state.FSM_IDLE ;
-+---------------------+--------------------+--------------------+---------------------+--------------------+
-; fsm_state.FSM_IDLE  ; 0                  ; 0                  ; 0                   ; 0                  ;
-; fsm_state.FSM_START ; 0                  ; 0                  ; 1                   ; 1                  ;
-; fsm_state.FSM_SEND  ; 0                  ; 1                  ; 0                   ; 1                  ;
-; fsm_state.FSM_STOP  ; 1                  ; 0                  ; 0                   ; 1                  ;
-+---------------------+--------------------+--------------------+---------------------+--------------------+
++-------------------------------------------------+
+; State Machine - |UART_OKBE|RX:rx_inst|state     ;
++------------+----------+------------+------------+
+; Name       ; state.00 ; state.stop ; state.read ;
++------------+----------+------------+------------+
+; state.00   ; 0        ; 0          ; 0          ;
+; state.read ; 1        ; 0          ; 1          ;
+; state.stop ; 1        ; 1          ; 0          ;
++------------+----------+------------+------------+
 
 
 Encoding Type:  One-Hot
-+----------------------------------------------------------------------------------------------------------+
-; State Machine - |UART_OKBE|uart_rx:i_uart_rx|fsm_state                                                   ;
-+---------------------+--------------------+--------------------+---------------------+--------------------+
-; Name                ; fsm_state.FSM_STOP ; fsm_state.FSM_RECV ; fsm_state.FSM_START ; fsm_state.FSM_IDLE ;
-+---------------------+--------------------+--------------------+---------------------+--------------------+
-; fsm_state.FSM_IDLE  ; 0                  ; 0                  ; 0                   ; 0                  ;
-; fsm_state.FSM_START ; 0                  ; 0                  ; 1                   ; 1                  ;
-; fsm_state.FSM_RECV  ; 0                  ; 1                  ; 0                   ; 1                  ;
-; fsm_state.FSM_STOP  ; 1                  ; 0                  ; 0                   ; 1                  ;
-+---------------------+--------------------+--------------------+---------------------+--------------------+
++---------------------------------------------+
+; State Machine - |UART_OKBE|TX:TX_inst|state ;
++-----------------+---------------------------+
+; Name            ; state.write               ;
++-----------------+---------------------------+
+; state.wait_data ; 0                         ;
+; state.write     ; 1                         ;
++-----------------+---------------------------+
 
 
-+-------------------------------------------------------------+
-; Registers Removed During Synthesis                          ;
-+----------------------------------------+--------------------+
-; Register name                          ; Reason for Removal ;
-+----------------------------------------+--------------------+
-; uart_tx:i_uart_tx|fsm_state~2          ; Lost fanout        ;
-; uart_tx:i_uart_tx|fsm_state~3          ; Lost fanout        ;
-; uart_tx:i_uart_tx|fsm_state~4          ; Lost fanout        ;
-; uart_rx:i_uart_rx|fsm_state~2          ; Lost fanout        ;
-; uart_rx:i_uart_rx|fsm_state~3          ; Lost fanout        ;
-; uart_rx:i_uart_rx|fsm_state~4          ; Lost fanout        ;
-; uart_tx:i_uart_tx|bit_counter[0..3]    ; Lost fanout        ;
-; uart_tx:i_uart_tx|cycle_counter[0..13] ; Lost fanout        ;
-; uart_tx:i_uart_tx|fsm_state.FSM_IDLE   ; Lost fanout        ;
-; uart_tx:i_uart_tx|fsm_state.FSM_START  ; Lost fanout        ;
-; uart_tx:i_uart_tx|fsm_state.FSM_SEND   ; Lost fanout        ;
-; uart_tx:i_uart_tx|fsm_state.FSM_STOP   ; Lost fanout        ;
-; Total Number of Removed Registers = 28 ;                    ;
-+----------------------------------------+--------------------+
-
-
-+-----------------------------------------------------------------------------------------------------------------------------------+
-; Removed Registers Triggering Further Register Optimizations                                                                       ;
-+-------------------------------+--------------------+------------------------------------------------------------------------------+
-; Register name                 ; Reason for Removal ; Registers Removed due to This Register                                       ;
-+-------------------------------+--------------------+------------------------------------------------------------------------------+
-; uart_tx:i_uart_tx|fsm_state~2 ; Lost Fanouts       ; uart_tx:i_uart_tx|bit_counter[3], uart_tx:i_uart_tx|bit_counter[2],          ;
-;                               ;                    ; uart_tx:i_uart_tx|bit_counter[1], uart_tx:i_uart_tx|bit_counter[0],          ;
-;                               ;                    ; uart_tx:i_uart_tx|cycle_counter[13], uart_tx:i_uart_tx|cycle_counter[12],    ;
-;                               ;                    ; uart_tx:i_uart_tx|cycle_counter[11], uart_tx:i_uart_tx|cycle_counter[10],    ;
-;                               ;                    ; uart_tx:i_uart_tx|cycle_counter[9], uart_tx:i_uart_tx|cycle_counter[8],      ;
-;                               ;                    ; uart_tx:i_uart_tx|cycle_counter[7], uart_tx:i_uart_tx|cycle_counter[6],      ;
-;                               ;                    ; uart_tx:i_uart_tx|cycle_counter[5], uart_tx:i_uart_tx|cycle_counter[4],      ;
-;                               ;                    ; uart_tx:i_uart_tx|cycle_counter[3], uart_tx:i_uart_tx|cycle_counter[2],      ;
-;                               ;                    ; uart_tx:i_uart_tx|cycle_counter[1], uart_tx:i_uart_tx|cycle_counter[0],      ;
-;                               ;                    ; uart_tx:i_uart_tx|fsm_state.FSM_IDLE, uart_tx:i_uart_tx|fsm_state.FSM_START, ;
-;                               ;                    ; uart_tx:i_uart_tx|fsm_state.FSM_SEND, uart_tx:i_uart_tx|fsm_state.FSM_STOP   ;
-+-------------------------------+--------------------+------------------------------------------------------------------------------+
++--------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                             ;
++---------------------------------------+----------------------------------------+
+; Register name                         ; Reason for Removal                     ;
++---------------------------------------+----------------------------------------+
+; TX:TX_inst|data[0]                    ; Stuck at GND due to stuck port data_in ;
+; state[1]                              ; Stuck at GND due to stuck port data_in ;
+; TX:TX_inst|state~4                    ; Lost fanout                            ;
+; Total Number of Removed Registers = 3 ;                                        ;
++---------------------------------------+----------------------------------------+
 
 
 +------------------------------------------------------+
@@ -299,82 +266,62 @@ Encoding Type:  One-Hot
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 24    ;
-; Number of registers using Synchronous Clear  ; 17    ;
-; Number of registers using Synchronous Load   ; 14    ;
+; Total registers                              ; 106   ;
+; Number of registers using Synchronous Clear  ; 0     ;
+; Number of registers using Synchronous Load   ; 0     ;
 ; Number of registers using Asynchronous Clear ; 0     ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 4     ;
+; Number of registers using Clock Enable       ; 65    ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
 
-+--------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                               ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------------------+
-; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                     ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------------------+
-; 4:1                ; 14 bits   ; 28 LEs        ; 14 LEs               ; 14 LEs                 ; Yes        ; |UART_OKBE|uart_tx:i_uart_tx|cycle_counter[7]  ;
-; 4:1                ; 14 bits   ; 28 LEs        ; 14 LEs               ; 14 LEs                 ; Yes        ; |UART_OKBE|uart_rx:i_uart_rx|cycle_counter[11] ;
-; 5:1                ; 4 bits    ; 12 LEs        ; 4 LEs                ; 8 LEs                  ; Yes        ; |UART_OKBE|uart_tx:i_uart_tx|bit_counter[1]    ;
-; 4:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |UART_OKBE|uart_rx:i_uart_rx|bit_counter[3]    ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------------------+
++--------------------------------------------------+
+; Inverted Register Statistics                     ;
++----------------------------------------+---------+
+; Inverted Register                      ; Fan out ;
++----------------------------------------+---------+
+; data[7]                                ; 1       ;
+; data[5]                                ; 1       ;
+; data[3]                                ; 1       ;
+; data[1]                                ; 1       ;
+; Total number of inverted registers = 4 ;         ;
++----------------------------------------+---------+
 
 
-+---------------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: Top-level Entity: |UART_OKBE ;
-+----------------+-------+--------------------------------------------------+
-; Parameter Name ; Value ; Type                                             ;
-+----------------+-------+--------------------------------------------------+
-; word_size      ; 8     ; Signed Integer                                   ;
-+----------------+-------+--------------------------------------------------+
++---------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                    ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output          ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-------------------------------------+
+; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |UART_OKBE|data[0]                  ;
+; 4:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; Yes        ; |UART_OKBE|state[0]                 ;
+; 8:1                ; 32 bits   ; 160 LEs       ; 64 LEs               ; 96 LEs                 ; Yes        ; |UART_OKBE|RX:rx_inst|clock_cnt[31] ;
+; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |UART_OKBE|data[7]                  ;
+; 6:1                ; 3 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; No         ; |UART_OKBE|RX:rx_inst|Selector33    ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-------------------------------------+
+
+
++---------------------------------------------------------+
+; Parameter Settings for User Entity Instance: TX:TX_inst ;
++----------------+----------+-----------------------------+
+; Parameter Name ; Value    ; Type                        ;
++----------------+----------+-----------------------------+
+; CLK_FREQ       ; 50000000 ; Signed Integer              ;
+; BAUD_RADE      ; 9600     ; Signed Integer              ;
++----------------+----------+-----------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
-+----------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: uart_rx:i_uart_rx ;
-+----------------+----------+------------------------------------+
-; Parameter Name ; Value    ; Type                               ;
-+----------------+----------+------------------------------------+
-; BIT_RATE       ; 9600     ; Signed Integer                     ;
-; CLK_HZ         ; 50000000 ; Signed Integer                     ;
-; PAYLOAD_BITS   ; 8        ; Signed Integer                     ;
-; STOP_BITS      ; 1        ; Signed Integer                     ;
-+----------------+----------+------------------------------------+
++---------------------------------------------------------+
+; Parameter Settings for User Entity Instance: RX:rx_inst ;
++----------------+----------+-----------------------------+
+; Parameter Name ; Value    ; Type                        ;
++----------------+----------+-----------------------------+
+; CLK_FREQ       ; 50000000 ; Signed Integer              ;
+; BAUD_RADE      ; 9600     ; Signed Integer              ;
++----------------+----------+-----------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+----------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: uart_tx:i_uart_tx ;
-+----------------+----------+------------------------------------+
-; Parameter Name ; Value    ; Type                               ;
-+----------------+----------+------------------------------------+
-; BIT_RATE       ; 9600     ; Signed Integer                     ;
-; CLK_HZ         ; 50000000 ; Signed Integer                     ;
-; PAYLOAD_BITS   ; 8        ; Signed Integer                     ;
-; STOP_BITS      ; 1        ; Signed Integer                     ;
-+----------------+----------+------------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+------------------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "uart_tx:i_uart_tx"                                                                          ;
-+--------------+--------+----------+-------------------------------------------------------------------------------------+
-; Port         ; Type   ; Severity ; Details                                                                             ;
-+--------------+--------+----------+-------------------------------------------------------------------------------------+
-; uart_txd     ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-; uart_tx_busy ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-+--------------+--------+----------+-------------------------------------------------------------------------------------+
-
-
-+-------------------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "uart_rx:i_uart_rx"                                                                           ;
-+---------------+--------+----------+-------------------------------------------------------------------------------------+
-; Port          ; Type   ; Severity ; Details                                                                             ;
-+---------------+--------+----------+-------------------------------------------------------------------------------------+
-; uart_rx_en    ; Input  ; Info     ; Stuck at VCC                                                                        ;
-; uart_rx_break ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-+---------------+--------+----------+-------------------------------------------------------------------------------------+
 
 
 +-----------------------------------------------------+
@@ -382,25 +329,22 @@ Note: In order to hide this table in the UI and the text report file, please set
 +-----------------------+-----------------------------+
 ; Type                  ; Count                       ;
 +-----------------------+-----------------------------+
-; boundary_port         ; 5                           ;
-; cycloneiii_ff         ; 24                          ;
-;     ENA               ; 4                           ;
-;     SCLR              ; 3                           ;
-;     SCLR SLD          ; 14                          ;
-;     plain             ; 3                           ;
-; cycloneiii_lcell_comb ; 40                          ;
-;     arith             ; 13                          ;
-;         2 data inputs ; 12                          ;
-;         3 data inputs ; 1                           ;
-;     normal            ; 27                          ;
+; boundary_port         ; 6                           ;
+; cycloneiii_ff         ; 106                         ;
+;     ENA               ; 65                          ;
+;     plain             ; 41                          ;
+; cycloneiii_lcell_comb ; 183                         ;
+;     arith             ; 66                          ;
+;         2 data inputs ; 66                          ;
+;     normal            ; 117                         ;
 ;         0 data inputs ; 1                           ;
-;         1 data inputs ; 2                           ;
-;         2 data inputs ; 2                           ;
-;         3 data inputs ; 7                           ;
-;         4 data inputs ; 15                          ;
+;         1 data inputs ; 9                           ;
+;         2 data inputs ; 15                          ;
+;         3 data inputs ; 15                          ;
+;         4 data inputs ; 77                          ;
 ;                       ;                             ;
-; Max LUT depth         ; 5.00                        ;
-; Average LUT depth     ; 2.75                        ;
+; Max LUT depth         ; 6.00                        ;
+; Average LUT depth     ; 4.01                        ;
 +-----------------------+-----------------------------+
 
 
@@ -409,7 +353,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:00     ;
+; Top            ; 00:00:01     ;
 +----------------+--------------+
 
 
@@ -419,46 +363,37 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 22.1std.1 Build 917 02/14/2023 SC Lite Edition
-    Info: Processing started: Fri Jan 19 23:14:45 2024
+    Info: Processing started: Fri Mar  8 22:49:25 2024
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off UART_OKBE -c UART_OKBE
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 4 of the 4 processors detected
-Info (12021): Found 1 design units, including 1 entities, in source file uart.sv
-    Info (12023): Found entity 1: UART_OKBE File: C:/Users/sobak/Desktop/FASM_Simply_Packet_T1/UART_OKBE/uart.sv Line: 1
-Info (12021): Found 1 design units, including 1 entities, in source file uart_tx.sv
-    Info (12023): Found entity 1: uart_tx File: C:/Users/sobak/Desktop/FASM_Simply_Packet_T1/UART_OKBE/uart_tx.sv Line: 1
-Info (12021): Found 1 design units, including 1 entities, in source file uart_rx.sv
-    Info (12023): Found entity 1: uart_rx File: C:/Users/sobak/Desktop/FASM_Simply_Packet_T1/UART_OKBE/uart_rx.sv Line: 1
-Warning (10236): Verilog HDL Implicit Net warning at uart.sv(30): created implicit net for "led2" File: C:/Users/sobak/Desktop/FASM_Simply_Packet_T1/UART_OKBE/uart.sv Line: 30
-Warning (10236): Verilog HDL Implicit Net warning at uart.sv(44): created implicit net for "uart_rxd" File: C:/Users/sobak/Desktop/FASM_Simply_Packet_T1/UART_OKBE/uart.sv Line: 44
-Warning (10236): Verilog HDL Implicit Net warning at uart.sv(61): created implicit net for "uart_txd" File: C:/Users/sobak/Desktop/FASM_Simply_Packet_T1/UART_OKBE/uart.sv Line: 61
-Warning (10222): Verilog HDL Parameter Declaration warning at uart.sv(14): Parameter Declaration in module "UART_OKBE" behaves as a Local Parameter Declaration because the module has a Module Parameter Port List File: C:/Users/sobak/Desktop/FASM_Simply_Packet_T1/UART_OKBE/uart.sv Line: 14
-Warning (10222): Verilog HDL Parameter Declaration warning at uart.sv(15): Parameter Declaration in module "UART_OKBE" behaves as a Local Parameter Declaration because the module has a Module Parameter Port List File: C:/Users/sobak/Desktop/FASM_Simply_Packet_T1/UART_OKBE/uart.sv Line: 15
-Warning (10222): Verilog HDL Parameter Declaration warning at uart.sv(16): Parameter Declaration in module "UART_OKBE" behaves as a Local Parameter Declaration because the module has a Module Parameter Port List File: C:/Users/sobak/Desktop/FASM_Simply_Packet_T1/UART_OKBE/uart.sv Line: 16
+Info (12021): Found 1 design units, including 1 entities, in source file uart_okbe.sv
+    Info (12023): Found entity 1: UART_OKBE File: C:/Users/sobak/Desktop/FASM_Simply_Packet_T1/UART_OKBE/UART_OKBE.sv Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file tx.sv
+    Info (12023): Found entity 1: TX File: C:/Users/sobak/Desktop/FASM_Simply_Packet_T1/UART_OKBE/tx.sv Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file rx.sv
+    Info (12023): Found entity 1: RX File: C:/Users/sobak/Desktop/FASM_Simply_Packet_T1/UART_OKBE/rx.sv Line: 1
 Info (12127): Elaborating entity "UART_OKBE" for the top level hierarchy
-Warning (10036): Verilog HDL or VHDL warning at uart.sv(30): object "led2" assigned a value but never read File: C:/Users/sobak/Desktop/FASM_Simply_Packet_T1/UART_OKBE/uart.sv Line: 30
-Warning (10034): Output port "RX" at uart.sv(7) has no driver File: C:/Users/sobak/Desktop/FASM_Simply_Packet_T1/UART_OKBE/uart.sv Line: 7
-Warning (10034): Output port "TX" at uart.sv(8) has no driver File: C:/Users/sobak/Desktop/FASM_Simply_Packet_T1/UART_OKBE/uart.sv Line: 8
-Info (12128): Elaborating entity "uart_rx" for hierarchy "uart_rx:i_uart_rx" File: C:/Users/sobak/Desktop/FASM_Simply_Packet_T1/UART_OKBE/uart.sv Line: 49
-Warning (10230): Verilog HDL assignment warning at uart_rx.sv(143): truncated value with size 14 to match size of target (4) File: C:/Users/sobak/Desktop/FASM_Simply_Packet_T1/UART_OKBE/uart_rx.sv Line: 143
-Info (12128): Elaborating entity "uart_tx" for hierarchy "uart_tx:i_uart_tx" File: C:/Users/sobak/Desktop/FASM_Simply_Packet_T1/UART_OKBE/uart.sv Line: 65
-Warning (10230): Verilog HDL assignment warning at uart_tx.sv(125): truncated value with size 14 to match size of target (4) File: C:/Users/sobak/Desktop/FASM_Simply_Packet_T1/UART_OKBE/uart_tx.sv Line: 125
-Warning (10230): Verilog HDL assignment warning at uart_tx.sv(127): truncated value with size 14 to match size of target (4) File: C:/Users/sobak/Desktop/FASM_Simply_Packet_T1/UART_OKBE/uart_tx.sv Line: 127
+Warning (10036): Verilog HDL or VHDL warning at UART_OKBE.sv(10): object "cnt" assigned a value but never read File: C:/Users/sobak/Desktop/FASM_Simply_Packet_T1/UART_OKBE/UART_OKBE.sv Line: 10
+Info (12128): Elaborating entity "TX" for hierarchy "TX:TX_inst" File: C:/Users/sobak/Desktop/FASM_Simply_Packet_T1/UART_OKBE/UART_OKBE.sv Line: 60
+Warning (10230): Verilog HDL assignment warning at tx.sv(47): truncated value with size 32 to match size of target (1) File: C:/Users/sobak/Desktop/FASM_Simply_Packet_T1/UART_OKBE/tx.sv Line: 47
+Warning (10230): Verilog HDL assignment warning at tx.sv(48): truncated value with size 32 to match size of target (1) File: C:/Users/sobak/Desktop/FASM_Simply_Packet_T1/UART_OKBE/tx.sv Line: 48
+Info (12128): Elaborating entity "RX" for hierarchy "RX:rx_inst" File: C:/Users/sobak/Desktop/FASM_Simply_Packet_T1/UART_OKBE/UART_OKBE.sv Line: 71
+Warning (10230): Verilog HDL assignment warning at rx.sv(64): truncated value with size 32 to match size of target (8) File: C:/Users/sobak/Desktop/FASM_Simply_Packet_T1/UART_OKBE/rx.sv Line: 64
 Warning (13024): Output pins are stuck at VCC or GND
-    Warning (13410): Pin "RX" is stuck at GND File: C:/Users/sobak/Desktop/FASM_Simply_Packet_T1/UART_OKBE/uart.sv Line: 7
-    Warning (13410): Pin "TX" is stuck at GND File: C:/Users/sobak/Desktop/FASM_Simply_Packet_T1/UART_OKBE/uart.sv Line: 8
+    Warning (13410): Pin "led2" is stuck at VCC File: C:/Users/sobak/Desktop/FASM_Simply_Packet_T1/UART_OKBE/UART_OKBE.sv Line: 5
 Info (286030): Timing-Driven Synthesis is running
-Info (17049): 28 registers lost all their fanouts during netlist optimizations.
+Info (17049): 1 registers lost all their fanouts during netlist optimizations.
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
-Info (21057): Implemented 45 device resources after synthesis - the final resource count might be different
-    Info (21058): Implemented 2 input pins
+Info (21057): Implemented 201 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 3 input pins
     Info (21059): Implemented 3 output pins
-    Info (21061): Implemented 40 logic cells
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 16 warnings
-    Info: Peak virtual memory: 4768 megabytes
-    Info: Processing ended: Fri Jan 19 23:14:55 2024
-    Info: Elapsed time: 00:00:10
-    Info: Total CPU time (on all processors): 00:00:19
+    Info (21061): Implemented 195 logic cells
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 7 warnings
+    Info: Peak virtual memory: 4767 megabytes
+    Info: Processing ended: Fri Mar  8 22:49:42 2024
+    Info: Elapsed time: 00:00:17
+    Info: Total CPU time (on all processors): 00:00:23
 
 
