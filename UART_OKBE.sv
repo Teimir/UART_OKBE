@@ -7,37 +7,42 @@ module UART_OKBE(
 	input rx
 );
 
-reg [31:0] cnt = 32'd0;
-reg [7:0] data = 8'haa;
-reg  data_tx_valid = '0;
-wire data_tx_ready;
-wire data_rx_valid;
-wire [7:0]data_rx;
 
-localparam wait_data = 2'b00;
+// Регистры
+reg [7:0] data = 8'haa; //Данные
+reg  data_tx_valid = '0; //Сигнал к отправке на ТХ
+wire data_tx_ready; //Сигнал, что готовы к отправке
+wire data_rx_valid; //Сигнал, что получение завершено
+wire [7:0]data_rx; //Данные с рх
+
+
+//Параметры конечного автомата
+localparam wait_data = 2'b00; 
 localparam write = 2'b01;
 
-reg [1:0] state = wait_data;
+//Регистр конечного автомата
+reg [1:0] state = wait_data; 
 
 always @(posedge clk) begin
-	if (~btn) begin
+	if (~btn) begin //Сброс?
 		data <= 8'h00;
-		state <= wait_data;
+		state <= write;
+		//data_rx_valid <= 1;
 	end
-	case(state)
-		wait_data: begin
-			if (data_rx_valid) begin
+	case(state) //Конечный автомат
+		wait_data: begin //Описание состояния ожидания
+			if (data_rx_valid) begin //Если данные получены - переносим в буфер и отправляем
 				data <= data_rx;
 				state <= write;
 			end
 		end
-		write: begin
-			if (data_tx_ready && data_tx_valid) begin
+		write: begin //Описание состояния отправки
+			if (data_tx_ready && data_tx_valid) begin //Если данные готовы к отправке и корректны, сбрасываем корректность и переходим к ожиданию
 					data_tx_valid <= 0;
 					state <= wait_data;
 			end
 			else begin
-				if (data_tx_ready) begin
+				if (data_tx_ready) begin //Готовы к отправке
 				data_tx_valid <= 1;
 				end
 			end
@@ -46,11 +51,11 @@ always @(posedge clk) begin
 end
 
 
-
+//Подключение модуля ТХ
 TX 
 #(
     .CLK_FREQ  (50000000),
-    .BAUD_RADE (9600)
+    .BAUD_RADE (115200)
 )TX_inst(
     .data_in    (data),
     .data_valid (data_tx_valid),
@@ -59,10 +64,12 @@ TX
     .tx_line    (tx)
 );    
 
+
+//Подключение модуля РХ
 RX   
 #(    
     .CLK_FREQ  (50000000),
-    .BAUD_RADE (9600)
+    .BAUD_RADE (115200)
 )rx_inst(
     .rx_line   (rx),
     .clk       (clk),
@@ -70,7 +77,7 @@ RX
     .data_valid(data_rx_valid)
 );
 
-
+//Вывод состояния на диоды
 assign led = ~state[0];
 assign led2 = ~state[1];
 endmodule
