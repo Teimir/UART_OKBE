@@ -1,11 +1,11 @@
 module TX
 #(
-    parameter CLK_FREQ = 50000000,
-    parameter BAUD_RADE = 9600
+    parameter CLK_FREQ = 50000000
 )(
     input [7:0] data_in,
     input data_valid,
     input clk,
+	 input [3:0] mode,
     output data_ready,
     output tx_line
 );
@@ -18,7 +18,7 @@ localparam write = 1;
 reg state = wait_data;
 
 //Параметр длинны бита
-localparam len_bit      = (CLK_FREQ / BAUD_RADE) ;
+wire [31:0] len_bit;
 
 //Регистр данных
 reg [9:0] data = 10'd0;
@@ -49,5 +49,10 @@ end
 
 assign data_ready = (state == wait_data) ? 1 : 0;
 assign tx_line = (state != write) ? 1 : data[bit_cnt];
+assign len_bit = (mode == 4'd0) ? 32'd10417: //4800
+					  (mode == 4'd1) ? 32'd5208 : //9600
+					  (mode == 4'd2) ? 32'd434   : //115200
+					  (mode == 4'd3) ? 32'd98    : //512000
+					  32'd5208; //9600 Default
 
 endmodule
